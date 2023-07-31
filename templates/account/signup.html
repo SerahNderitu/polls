@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+{% load widget_tweaks %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Signup </title>
+
+     <link href="{% static 'theme/' %}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'theme/' %}font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="{% static 'theme/' %}css/animate.css" rel="stylesheet">
+    <link href="{% static 'theme/' %}css/style.css" rel="stylesheet">
+    <link href="{% static 'theme/' %}css/plugins/bootstrapSocial/bootstrap-social.css" rel="stylesheet">
+
+    <title> Create Account </title>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+
+               <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+
+                <div class="ibox-content">
+                <p style="max-height:100px"  class="text-center">
+
+                 <br>
+                     <h3>Create New Account</h3>
+
+                <p>
+                    {{ form.non_field_errors }}
+
+                    {{ form.source.errors }}
+                    {{ form.source }}
+                </p>
+                    <form class="m-t" role="form" action="" method="POST">
+                         <div class="form-group">
+                         {{ form.email|add_class:'form-control'|append_attr:'placeholder:Email Address'}}
+                        <small style="color:red">{{ form.email.errors }}</small>
+                          </div>
+                    <br>
+                            <div class="form-group">
+
+                              {{ form.password1|add_class:'form-control'|append_attr:'placeholder:Password'}}
+                            <small style="color:red">{{ form.password1.errors }}</small>
+                          </div>
+                    <br>
+                         <div class="form-group">
+
+                        {{ form.password2|add_class:'form-control'|append_attr:'placeholder:Repeat Password'}}
+                        <small style="color:red">{{ form.password2.errors }}</small>
+                       {% if redirect_field_value %}
+                      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                         {% endif %}
+                          {% csrf_token %}
+                          </div>
+                    <br>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Create Account</button>
+                        <h3 style="text-align: Center">Already have an account?</h3>
+
+
+
+                        <a href="{% url 'account_login' %}" class="btn btn-block btn-social btn-instagram" style="text-align: Center">
+                            <span class="fa fa-sign-in"></span> Log in Here
+                        </a>
+  
+
+                    </form>
+                    <p class="m-t">
+                        <small></small>
+                    </p>
+                </div>
+            </div>
+           <div class="col-md-3"></div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6 text-right">
+               <small>Polling © 2023</small>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
