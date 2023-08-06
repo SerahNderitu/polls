@@ -32,6 +32,7 @@ class Choice(models.Model):
             return self.choice_text
 
 
+
 class Poll(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)

@@ -117,6 +117,7 @@ class DetailView(generic.DetailView):
         return context
 
 
+
 class ResultsView(generic.DetailView):  # (results of a specific question)
     model = Question
     template_name = 'polls/results.html'
@@ -138,6 +139,7 @@ def vote(request, question_id):
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
             # user hits the Back button.
+
             return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
@@ -192,25 +194,16 @@ class PollUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PollDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Poll
-    template_name = 'polls/poll_confirm_delete.html'
-    success_url = reverse_lazy('question-list')
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         poll = self.get_object()
-        return self.request.user == poll.created_by
-
-    def get_success_url(self):
-        return reverse_lazy('polls:detail', kwargs={'pk': self.object.choice.question_id})
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.pop({'question': self.object.choice.question_id})
-        return kwargs
+        return self.request.user == poll.created_by or self.request.user.is_staff
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context["question"] = Question.objects.get(id=self.object.choice.question_id)
+        context["question"] = self.get_object()
         return context
 
 
@@ -224,3 +217,4 @@ def pollformview(request):
 
     context['form'] = form
     return render(request, "polls/poll_update.html", context)
+

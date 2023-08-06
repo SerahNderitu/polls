@@ -1,6 +1,11 @@
-<h1>{{ question }}</h1>
+<h1>{{ question.choice }}</h1>
 <form action="" method="post">
 {% csrf_token %}
-    {{ form.as_p }}
-<input type="submit" value="Submit">
+    <p>Are you sure you want to delete
+        {{ object.choice }}
+    </p>
+    <input type="submit" value="Confirm">
 </form>
+ <a href="{% url 'polls:detail' object.id %}">
+        <button>Cancel</button>
+    </a>

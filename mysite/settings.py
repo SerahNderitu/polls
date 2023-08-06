@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+<<<<<<< HEAD
 import os
+=======
+>>>>>>> 3d9f44b3822fd160ba9638b171db81e277956edc
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,10 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'allauth',
     'allauth.socialaccount',
     'allauth.account',
     'widget_tweaks',
+=======
+>>>>>>> 3d9f44b3822fd160ba9638b171db81e277956edc
     'polls',
 
 
@@ -127,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 STATIC_ROOT = os.path.join(BASE_DIR, 'prodstatic/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
@@ -134,6 +141,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/polls/'
+=======
+>>>>>>> 3d9f44b3822fd160ba9638b171db81e277956edc
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

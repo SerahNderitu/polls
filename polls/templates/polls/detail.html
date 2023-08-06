@@ -1,8 +1,10 @@
+
 <form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
 <fieldset>
     <legend><h1>{{ question.question_text }}</h1></legend>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 Select a choice to vote <br>
 <ol>
     {% for choice in question.choice_set.all %}
@@ -11,7 +13,7 @@ Select a choice to vote <br>
     {% endfor %}
 </ol>
 
-Users who voted
+Users who voted for this question
 <ul>
 
     {% for poll in polls %}
@@ -25,4 +27,12 @@ Users who voted
 </fieldset>
 <br>
     <a href="{% url 'polls:poll-create' question.pk %}">Vote Now</a>
+
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+</fieldset>
+<input type="submit" value="Vote">
+
 </form>
