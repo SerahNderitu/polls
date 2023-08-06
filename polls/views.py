@@ -117,6 +117,7 @@ class DetailView(generic.DetailView):
         return context
 
 
+
 class ResultsView(generic.DetailView):  # (results of a specific question)
     model = Question
     template_name = 'polls/results.html'
@@ -138,6 +139,7 @@ def vote(request, question_id):
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
             # user hits the Back button.
+
             return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
@@ -215,3 +217,4 @@ def pollformview(request):
 
     context['form'] = form
     return render(request, "polls/poll_update.html", context)
+

@@ -5,3 +5,4 @@ sqlparse==0.4.4
 typing_extensions==4.1.1
 django-widget-tweaks==1.4.11
 django-allauth==0.53.1
+
