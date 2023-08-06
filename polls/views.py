@@ -192,25 +192,16 @@ class PollUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PollDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Poll
-    template_name = 'polls/poll_confirm_delete.html'
-    success_url = reverse_lazy('question-list')
+    success_url = reverse_lazy('index')
 
     def test_func(self):
         poll = self.get_object()
-        return self.request.user == poll.created_by
-
-    def get_success_url(self):
-        return reverse_lazy('polls:detail', kwargs={'pk': self.object.choice.question_id})
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs.pop({'question': self.object.choice.question_id})
-        return kwargs
+        return self.request.user == poll.created_by or self.request.user.is_staff
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        context["question"] = Question.objects.get(id=self.object.choice.question_id)
+        context["question"] = self.get_object()
         return context
 
 

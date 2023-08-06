@@ -29,8 +29,9 @@ class PollForm(forms.ModelForm):
         fields = ['choice', 'comment']
 
     def __init__(self, *args, **kwargs):
-        self.question = kwargs.pop("question")
-        super().__init__(*args, **kwargs)
+        self.question = kwargs.pop("question")  # to get additional data (in this case, a question object) that needs to
+        # be passed to the form but should not be part of the form's fields.
+        super().__init__(*args, **kwargs)  # call invokes the parent class's (forms.ModelForm) constructor
         self.fields['choice'] = forms.ModelChoiceField(
             queryset=Choice.objects.filter(question=self.question))
 
